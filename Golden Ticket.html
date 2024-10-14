@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Ticket with Timer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-image: url("C:\Users\Daniel\Pictures\G"); /* Reemplaza con la ruta de tu imagen */
+            background-size: cover; /* Ajusta la imagen para que cubra toda la pantalla */
+            background-position: center; /* Centra la imagen en la pantalla */
+            font-family: 'Libre Baskerville', serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .ticket {
+            background: linear-gradient(45deg, rgba(212, 175, 55, 0.8), rgba(184, 134, 11, 0.8));
+            color: #2f2f2f;
+            border: 5px solid #8b6914;
+            width: 700px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            font-family: 'Playfair Display', serif;
+        }
+        .ticket h1 {
+            font-size: 60px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #4a2f09;
+            margin-bottom: 10px;
+        }
+        .ticket p {
+            font-size: 20px;
+            margin: 10px 0;
+            color: #4a2f09;
+        }
+        .ticket .details p {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2f2f2f;
+            margin-top: 20px;
+        }
+        .gold-border {
+            border: 3px dashed #c5a950;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .gold-border p {
+            margin: 5px 0;
+        }
+
+        /* Estilos de la barra de chocolate */
+        .chocolate-wrapper {
+            position: relative;
+            width: 600px; /* Aumenta el ancho de la barra */
+            height: 400px; /* Aumenta la altura de la barra */
+            background-color: #5d4037; /* Color más realista para el chocolate */
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            margin: 20px auto;
+            transition: transform 0.3s ease;
+        }
+        .chocolate-wrapper:hover {
+            transform: scale(1.05); /* Efecto de hover */
+        }
+        .wrapper-top {
+            background: linear-gradient(45deg, #d4af37, #b8860b); /* Envoltura dorada */
+            height: 100px;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            border-bottom: 5px solid #8b6914;
+            transition: height 0.7s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        .ticket-reveal {
+            position: absolute;
+            bottom: -300px; /* Aumenta la posición inicial para que el ticket se vea bien */
+            background-color: rgba(255, 248, 225, 0.8); /* Color suave para el ticket */
+            border-radius: 10px;
+            width: 90%;
+            height: 80%;
+            border: 5px solid #8b6914;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: bottom 0.7s ease;
+            left: 5%; /* Centrar el ticket */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .ticket-reveal h1 {
+            font-size: 26px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #4a2f09;
+        }
+        .ticket-reveal p {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #4a2f09;
+        }
+        .chocolate-wrapper.open .wrapper-top {
+            height: 0;
+        }
+        .chocolate-wrapper.open .ticket-reveal {
+            bottom: 0;
+        }
+
+        /* Estilos del cronómetro */
+        .cronometro {
+            text-align: center;
+            background-color: rgba(248, 243, 223, 0.8);
+            padding: 30px;
+            border: 3px solid #8b6914;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            margin: 50px auto;
+            width: 400px;
+        }
+        .time {
+            font-size: 50px;
+            color: #4a2f09;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            margin: 5px;
+            background-color: #d4af37;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        button:hover {
+            background-color: #b8860b;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra de Chocolate -->
+    <div class="chocolate-wrapper" onclick="revealTicket()">
+        <div class="wrapper-top"></div>
+        <div class="ticket-reveal">
+            <h1>Golden Ticket</h1>
+            <p>Felicidades has encontrado el Golden ticket del 4F para su evento!</p>
+            <p>Estas Cordialmente invitado a:</p>
+            <div class="details">
+                <p>Evento de Gastronomia de 4F</p>
+                <p>Dia: 29 de Noviembre</p>
+                <p>Empieza y Termina: 2:00 PM - 5:00 PM</p>
+                <p>Lugar del Evento: Universidad Tecnologica de Puebla</p>
+            </div>
+            <div class="gold-border">
+                <p>Por favor Confirme su Asistencia al numero;</p>
+                <p>By November 10th</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cronómetro Section -->
+    <div class="cronometro">
+        <div class="time" id="display">00:00:00:00</div> <!-- Cambiado a 00:00:00:00 para incluir días -->
+        <button onclick="start()">Start</button>
+        <button onclick="stop()">Stop</button>
+        <button onclick="reset()">Reset</button>
+    </div>
+
+    <script>
+        let days = 0;  // Inicializa los días aquí
+        let hours = 2;  // Inicializa las horas aquí
+        let minutes = 45; // Inicializa los minutos aquí
+        let seconds = 30;  // Inicializa los segundos aquí
+        let interval = null;
+        let isRunning = false;
+
+        // Actualizar pantalla del cronómetro
+        function updateDisplay() {
+            let d = days < 10 ? "0" + days : days;
+            let h = hours < 10 ? "0" + hours : hours;
+            let m = minutes < 10 ? "0" + minutes : minutes;
+            let s = seconds < 10 ? "0" + seconds : seconds;
+            document.getElementById("display").innerText = `${d}:${h}:${m}:${s}`; // Mostrar días
+        }
+
+        // Iniciar el cronómetro
+        function start() {
+            if (!isRunning) {
+                interval = setInterval(() => {
+                    if (seconds === 0 && minutes === 0 && hours === 0 && days === 0) {
+                        stop();
+                        alert("¡El tiempo se ha agotado!");
+                        return;
+                    }
+                    seconds--;
+                    if (seconds < 0) {
+                        seconds = 59;
+                        minutes--;
+                        if (minutes < 0) {
+                            minutes = 59;
+                            hours--;
+                            if (hours < 0) {
+                                hours = 23;
+                                days--;
+                            }
+                        }
+                    }
+                    updateDisplay();
+                }, 1000);
+                isRunning = true;
+            }
+        }
+
+        // Detener el cronómetro
+        function stop() {
+            clearInterval(interval);
+            isRunning = false;
+        }
+
+        // Reiniciar el cronómetro
+        function reset() {
+            stop();
+            days = 0;  // Reinicia a los días originales
+            hours = 2;  // Reinicia a las horas originales
+            minutes = 45; // Reinicia a los minutos originales
+            seconds = 30;  // Reinicia a los segundos originales
+            updateDisplay();
+        }
+
+        // Inicializar la pantalla con el tiempo predefinido
+        updateDisplay();
+
+        // Función para revelar el ticket al hacer clic
+        function revealTicket() {
+            const wrapper = document.querySelector('.chocolate-wrapper');
+            wrapper.classList.toggle('open');
+        }
+
+        // Iniciar el cronómetro automáticamente al cargar la página
+        window.onload = function() {
+            start();
+        };
+    </script>
+
+</body>
+</html>
